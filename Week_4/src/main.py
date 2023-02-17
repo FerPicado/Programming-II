@@ -3,7 +3,8 @@ import gestion_ventas as gv
 
 
 def invoiceRegister():
-    gv.create_invoice(1, 12000)
+    amount = float(input("Amount: "))
+    gv.create_invoice(amount)
 
 
 def showInvoice():

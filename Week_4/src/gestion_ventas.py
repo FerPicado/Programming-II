@@ -2,18 +2,26 @@ from domine import Invoice
 from datetime import datetime
 
 invoice_list = []
+cons_invoice_format = "INV{0}"
+cons_invoice = 1
 
 
-def create_invoice(invoice_id, invoice_total):
+def create_invoice(invoice_total):
 
     # Instanciamos
-    invoiceObj = Invoice()
+    try:
+        global cons_invoice
+        invoiceObj = Invoice()
+        num_invoice = str(cons_invoice).rjust(3, '0')
 
-    invoiceObj.invoice_id = "INVOICE #00001"
-    invoiceObj.invoice_date = datetime.now()
-    invoiceObj.invoice_total = 234254
-    invoiceObj.calc_iva()
-    invoice_list.append(invoiceObj)
+        invoiceObj.invoice_id = cons_invoice_format.format(num_invoice)
+        invoiceObj.invoice_date = datetime.now()
+        invoiceObj.invoice_total = 234254
+        invoiceObj.calc_iva()
+        invoice_list.append(invoiceObj)
+        cons_invoice += 1
+    except UnboundLocalError:
+        print("Error")
 
 
 def showInvoice():
